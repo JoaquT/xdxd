@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Constancia de Operación</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+    }
+
+    #fechaTexto {
+    font-size: 16px;      
+    margin: 4px 0;        
+    font-weight: normal;  
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: italic;
+    }
+    .container {
+      width: 360px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .header {
+      background-color: #2b6f3e;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .header-row h1 {
+      flex: 1;
+      text-align: center;
+      font-size: 17px;
+      margin: 0;
+      font-weight: normal;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 100;
+    }
+
+    .spacer {
+      width: 20px;
+      visibility: hidden;
+    }
+
+    .close-btn {
+      width: 20px;
+      text-align: right;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .header p {
+      margin: 5px 0 0;
+      font-size: 14px;
+    }
+
+    .amount {
+  text-align: center;
+  font-weight: 100;
+  margin: 15px 0;
+}
+
+.amount h1 {
+  font-size: 17px;
+  margin: 0;
+  font-weight: 100;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+    .logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .logos img {
+      width: 70px;
+      margin: 0 10px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      margin: 5px 0;
+    }
+
+    .label {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .value {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .info {
+      background: #e6f1fb;
+      padding: 10px;
+      font-size: 12px;
+      text-align: center;
+      color: #333;
+      margin-top: 10px;
+    }
+
+    .btns {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .btns input, .btns button {
+      padding: 5px 10px;
+      font-size: 14px;
+      margin: 5px;
+    }
+    .monto{
+        font-weight: 100;
+        font-size: 28px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    .icono {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 28px;
+  background-color: #003366; 
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  margin: 0 auto 5px auto; 
+}
+.salir-box {
+  background-color: #3276ba; 
+  color: white;
+  text-align: center;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 6px; 
+  width: 100px;               
+  margin: 10px auto;
+}
+
+.linea-separadora {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+
+}
+
+
+
+
+  </style>
+</head>
+<body>
+  <div class="btns">
+    nueva fecha y hora: <input type="text" id="fechaInput" value="03 junio 2025, 20:02 h">
+    en el siguiente recuadro  proceda con el nuevo monto: <input type="text" id="importeInput" value="10.00">
+    <button onclick="actualizar()">actualizar imagen</button>
+    <button onclick="descargar()">descargar imagen</button>
+  </div>
+
+  <div class="container" id="captura">
+    <div class="header">
+      <div class="header-row">
+        <span class="spacer">×</span>
+        <h1>Envío a contactos</h1>
+        <span class="close-btn">×</span>
+      </div>
+      <br>
+      <h2>Operación exitosa</h2>
+      <p id="fechaTexto">03 junio 2025, 20:02 h</p>
+      <br>
+      <div class="amount">
+  <h1>Importe enviado</h1>
+  <div class="monto"><strong>S/<span id="importeTexto">10.00</span></strong></div>
+</div>
+    </div>
+
+    <div class="logos">
+      <img src="https://d31dn7nfpuwjnm.cloudfront.net/images/valoraciones/0045/5659/C%C3%B3mo_solicitar_tarjeta_de_d%C3%A9bito_en_BBVA_foro.jpeg?1631435969" alt="BBVA">
+      <img src="data:image/jpeg;base64,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" alt="Plin">
+    </div>
+
+    <div class="row">
+      <div>
+        <div class="label">Cuenta independen...</div>
+        <div class="value">•4050</div>
+      </div>
+      <div>
+        <div class="label">Jose moya machaca</div>
+        <div class="value">•3213</div>
+      </div>
+    </div>
+    <br>
+    <div class="row"><div class="label">Entidad de destino</div><div class="value">Plin</div></div>
+    <br>
+    <div class="row"><div class="label">Comisión</div><div class="value">S/0.00</div></div>
+    <br>
+    <div class="row"><div class="label">ITF</div><div class="value">S/0.00</div></div>
+    <br>
+    <div class="row"><div class="label">Número de operación</div><div class="value">C660D3F0A52C</div></div>
+    <br>
+    <div class="row"><div class="label">Tipo de operación</div><div class="value">Envío a contactos</div></div>
+    <div class="info">
+  <div class="icono">¡</div>
+  <br>
+  <br>
+  <div>La constancia fue enviada a este correo electrónico:</div>
+</div>
+<div class="salir-box">
+  Salir
+</div>
+<hr class="linea-separadora">
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    function actualizar() {
+      const fecha = document.getElementById('fechaInput').value;
+      const importe = document.getElementById('importeInput').value;
+      document.getElementById('fechaTexto').textContent = fecha;
+      document.getElementById('importeTexto').textContent = importe;
+    }
+
+    function descargar() {
+      html2canvas(document.getElementById("captura")).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "imagencita.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    }
+  </script>
+</body>
+</html>
